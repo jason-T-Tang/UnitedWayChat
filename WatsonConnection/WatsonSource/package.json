@@ -1,36 +1,16 @@
 {
-  "name": "url-shortener",
+  "name": "watsonsource",
   "version": "1.0.0",
-  "description": "URL Shortener Demo",
-  "main": "src/server.js",
-  "scripts": {
-    "start": "npx nodemon src/server.js --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/freshman-tech/url-shortener.git"
-  },
-  "keywords": [
-    "url shortener",
-    "mongodb",
-    "nodejs"
-  ],
-  "author": "Ayo Isaiah",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/freshman-tech/url-shortener/issues"
-  },
-  "homepage": "https://github.com/freshman-tech/url-shortener#readme",
-  "devDependencies": {
-    "nodemon": "^1.18.9"
-  },
+  "description": "Watson Chatbot for IBM project",
+  "main": "index.js",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "dotenv": "^6.2.0",
-    "express": "^4.16.4",
-    "mongodb": "^3.1.10",
-    "nanoid": "^2.0.1",
     "prompt-sync": "^4.1.6",
     "watson-developer-cloud": "^4.0.1"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
 }
