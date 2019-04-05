@@ -17,7 +17,6 @@ var service = new AssistantV1({
 var workspace_id = '380f9f30-5b51-481b-98f8-088936a16972';
 var setContext;
 var bool=false;
-var bool1=false;
 
 //Dependencies
 app.use(express.static(path.join(__dirname, 'public')))
@@ -38,35 +37,34 @@ const server = app.listen(app.get('port'), () => {
 app.post('/new', (req, res) => {
 
  if(!bool){
- //Initial Message
- service.message({
-  workspace_id: workspace_id,
+ //Initial Message. Runs this if it is the first time to get the context
+ service.message({ //service.message is how you send a request to the assistant
+//(asistant_name).message has 2 arguments, parameters .json, and callback() (the function that does the thing)
+  workspace_id: workspace_id, //parameters for the request as a json
   input:{text:"hello"},
-  }, processResponse);
+  }, processResponse); //runs processResponse as the callback function
  }
- else if(bool){
+ else if(bool){ //if it is the second message and there is a context to be set,
 	  service.message({
   workspace_id: workspace_id,
   input:{text:req.body.text},
-  context:setContext,
+  context:setContext, //sets the context, saving the state from the last message
   }, processResponse);
  }
-  //Recursive dialogue
+ //the callback function
   function processResponse(err, response) {
-	setContext=response.context;
+	setContext=response.context; //updates state
 	//console.log(setContext);
-  bool=true;
+  bool=true; //it is the second message
+  
+  //If statement is not mine, do not touch
   if (err) {
     console.error(err); // Catch Errors
     return;
   }
   // Display the output from dialog, if any. Assumes a single text response.
-  if (response.output.generic.length != 0) {
-	  for(var i=0;i<response.output.generic.length;i++){
-	  //console.log(response.output.generic[i].text);
-	  }
-	  console.log(response);
-	  res.send(response);
+	  console.log(response); //logs it for developer use
+	  res.send(response);//sends it back to the function which called for the Post
 
   }
   
